@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <h1>first</h1>
+        <p>@ViewData["num"]</p>
+        <p>@DateTime.Now.ToString()</p>
+        <p>@ViewBag.time</p>
+        @*<%:@ViewData["time"]%>*@
+
+        @*@for(int i=0;i<10;i++)
+        {
+            <p>@i</p>
+        }*@
+
+        @if(ViewData.Count >0)
+        {
+            <p>viewdata里面有数据</p>
+        }
+        else
+        {<p>viewdata里面没有数据</p> }
+
+        @{ int i = 0;i++;i = i + 10; <p>@i</p>}
+        @*@{ int a = 1;string str = "<h1>hello</h1>";
+            Response.Write(a);}*@
+        <br/>
+        @*@{string str = "<script>alert('error')</script>"; }
+        @str
+        @Html.Raw(str)
+        @Html.Encode(str)*@
+        @*@{string str1 = "123";}
+        <p>@str1.IsInt()</p>
+        <p>@str1.AsInt()</p>*@
+        <a href="/home/index">首页</a>
+
+    </div>
+</body>
+</html>

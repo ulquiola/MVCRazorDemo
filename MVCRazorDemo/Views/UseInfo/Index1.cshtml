@@ -1,0 +1,56 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<MVCRazorDemo.Models.UserInfo>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index1</title>
+  
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("Index1", "UseInfo", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+        {
+            <label for="searchString" class="control-label">通过名字查找：</label>
+            <div class="form-group">
+                @Html.TextBox("searchString", ViewBag.SearchString as string, htmlAttributes: new { @class = "form-control", placeholder = "请输入名字" })   
+            </div>
+
+            <input type="submit" value="查找" class="btn btn-primary" />
+        }
+        @Html.ActionLink("添加", "Add", "useInfo")
+        <hr />
+        <table border=" 1">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>密码</th>
+                <th>修改</th>
+                <th>删除</th>
+            </tr>
+            @foreach (var userinfo in Model)
+            {
+                <tr>
+                    <td>@userinfo.UID</td>
+                    <td>@userinfo.UName</td>
+                    <td>@userinfo.UPassWord</td>
+                    <td>@Html.ActionLink("修改", "Edit", "UseInfo", new { id = userinfo.UID }, null)</td>
+                    <td>@Html.ActionLink("删除", "Remove", "UseInfo", new { id = userinfo.UID }, null)</td>
+                </tr>
+            }
+        </table> 
+       
+</div>
+    <div >
+        <div >Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+        @*@Html.PagedListPager(Model, page => Url.Action("Index1", "UseInfo", new { page }))*@
+        @*@Html.PagedListPager(Model, page => Url.Action("Index1", "UseInfo", new { page, sortOrder = ViewBag.CurrentSort, SearchString = ViewBag.SearchString }))*@
+    @Html.PagedListPager(Model, page => Url.Action("Index1", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 3 })  
+    </div>
+</body>
+</html>

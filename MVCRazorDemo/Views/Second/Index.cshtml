@@ -1,0 +1,48 @@
+﻿@model MVCRazorDemo.Models.person
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <a href="/first/index">first</a>
+        <a href="@Url.Action("Index","first")">首页</a>
+        @Html.ActionLink("首页","index","first",new{ name = "Jake" },new { })
+        @*@Html.Label("nihao");*@
+        @Html.TextBox("username","jake")
+        @Html.TextArea("username", "jake")
+        <br/>
+        @Html.Password("pass","123")
+        @Html.Hidden("pass", "123")
+        <hr/>
+        红色
+        @Html.CheckBox("red",true)
+
+        男 @Html.RadioButton("sex","men",false)
+         女 @Html.RadioButton("sex","women",true)
+        <hr/>
+        red @Html.RadioButton("sex1", "women", true)
+
+        @Html.DropDownList("city")
+        <hr/>
+        @Html.TextBox("num")
+
+        @using (Html.BeginForm("index", "frist", FormMethod.Post))
+        {
+            @Html.TextBox("QQ")
+            @Html.TextBoxFor(c=>c.QQ)
+            @Model.QQ
+            <input type="button" value=" " />
+            <input type="submit" value=" "/>
+        }
+
+    </div>
+</body>
+</html>

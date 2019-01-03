@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>index1</title>
+</head>
+<body>
+    <div> 
+        <table border="1">
+            <tr>
+                <th>新闻编号</th>
+                <th>新闻标题</th>
+                <th>新闻类型</th>
+                <th>修改</th>
+                <th>删除</th>
+            </tr>
+            @foreach (var newsinfo in Model)
+            {
+                <tr>
+                    <td>@newsinfo.nid</td>
+                    <td>@newsinfo.nTitle</td>
+                    <td>@newsinfo.NewsType.tTitle</td>
+                    <td>@Html.ActionLink("修改", "Edit", "NewsInfo",new { id= newsinfo.nid },null)</td>
+                    <td>@Html.ActionLink("删除", "Remove", "NewsInfo", new { id = newsinfo.nid }, null)</td>
+                </tr>
+            }
+        </table>
+        <hr/>
+        @Html.ActionLink("添加","Add", "NewsInfo")
+    </div>
+</body>
+</html>

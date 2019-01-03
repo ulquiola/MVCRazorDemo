@@ -1,0 +1,86 @@
+﻿@model MVCRazorDemo.Models.userViewModel
+@{
+    Layout = null;
+}
+@{
+    Html.EnableClientValidation();
+}
+@Scripts.Render("~/bundles/jquery")
+@*@Scripts.Render("~/bundles/bootstrap")*@
+@Scripts.Render("~/bundles/jqueryval")
+
+@Scripts.Render("~/Scripts/jquery.validate.js")
+<script>
+    $(function () {
+
+        // 为看不清楚绑定事件
+        $("#seee").click(function () {
+            $("#validimgs").attr("src", "@Url.Content("~/YZM/GetYZM?")" + Math.random());
+        });
+
+        // 为验证码绑定click与mouseover
+        $("#validimgs").mouseover(function () {
+            $(this).css("cursor", "pointer");
+        }).click(function () {
+            $("#seee").trigger("click");
+        });
+    });
+    function reloadcodes() {
+        var verify = document.getElementById('validimgs');
+        verify.setAttribute('src', '@Url.Content("/YZM/GetYZM?")' + Math.random());
+    }
+ </script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("Register", "LoginRegister", FormMethod.Post))
+        {   
+            @Html.ValidationSummary()
+            <label >用户名</label>
+            <div>
+                @Html.TextBoxFor(model => model.Uname , new { @class = "form-control", id = "username", style = "width: 300px;" })
+                @Html.ValidationMessageFor(model => model.Uname)
+            </div>
+            <label >密码</label>
+            <div >
+                @Html.TextBoxFor(model => model.UPassWord, new { @class = "form-control", placeholder = "Password", type = "password", id = "R_password", style = "width: 300px;" })
+             
+                @Html.ValidationMessageFor(model => model.UPassWord,"", new { @class = "text-danger" })
+            </div>
+            <label >确认密码</label>
+            <div>
+                @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "ConfirmPassword", type = "password", id = "ChkUserPwd", name = "ChkUserPwd", style = "width: 300px;" })
+               
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" } )
+            </div>
+           
+             <label >验证码</label>
+            <div>
+                <div style="float: left;">
+                    <input style="width: 200px;"  id="txtverifcode1" name="txtverifcode1" type="text">   
+                </div>
+                <div style="float: left;">
+                    <span id="txtverifcod2"> <img id="validimgs" src="@Url.Action("GetYZM", "YZM")" alt="看不清，点击换一张" /><a style="text-decoration:none;cursor:pointer" id="seee" onclick="reloadcodes()">换一张</a></span>
+                  
+                </div>
+            </div>
+            
+            <div>
+                <div tyle="float: left;">
+
+                    <input type="submit"class="btn btn-info"  value="立即注册" />
+                </div>
+            </div>
+
+        }
+    </div>
+  
+</body>
+</html>

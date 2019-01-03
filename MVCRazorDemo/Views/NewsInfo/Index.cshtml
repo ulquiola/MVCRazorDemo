@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <table border="1">
+            <tr>
+                <th>新闻编号</th>
+                <th>新闻标题</th>
+                <th>新闻类型</th>
+            </tr>
+            @foreach (var newsinfo in Model)
+            {
+                <tr>
+                    <td>@newsinfo.NID</td>
+                    <td>@newsinfo.NTitle</td>
+                    <td>@newsinfo.TTitle</td>
+                </tr>
+            }  
+        </table>
+    </div>
+</body>
+</html>

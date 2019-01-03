@@ -1,0 +1,28 @@
+﻿@model  MVCRazorDemo.Models.UserInfo 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("Add", "UseInfo", FormMethod.Post))
+        {
+            <span>姓名：</span>
+            @Html.EditorFor(u=>u.UName);
+            <br/>
+            <span>密码：</span>
+            @Html.EditorFor(u => u.UPassWord);
+            <br/>
+            <input type="submit" value="添加 "/>
+
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿@model MVCRazorDemo.Models.NewsInfo 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("Edit", "NewsInfo", FormMethod.Post))
+        {
+            <span>新闻编号：</span>
+            @Model.nid
+            @Html.HiddenFor(u=>u.nid)
+            <br />
+            <span>新闻标题：</span>
+            @Html.EditorFor(u => u.nTitle)
+            <br />
+            <span>新闻类型：</span>
+            @*@Html.DropDownList("Type")*@
+            @*@Html.EditorFor(u => u.nTid)*@
+            @Html.DropDownListFor(u => u.nTid, ViewBag.Type as IEnumerable<SelectListItem>)
+            <hr />
+            <input type="submit" value="修改" />
+        }
+    </div>
+</body>
+</html>
